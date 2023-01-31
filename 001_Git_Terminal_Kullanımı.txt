@@ -1,0 +1,430 @@
+-------- GitHub Login ---------
+git config --global user.name myusername
+git config --global user.email myemail
+git config --global github.user myusername
+git config --global github.token mytoken
+
+
+-------- Temel Terminal Komutları --------
+pwd //buludnuğumuz klasörü gösterir.
+clear //terminali temizler.
+ls //terminale dosya / klasör listeler.
+cd C:/Users/Huseyin_Aydin/Desktop/ //masaüstüne gider.
+mkdir deneme //deneme isimli klasörü oluşturur.
+touch not.txt //not.txt dosyasını oluşturur.
+rm not.txt //siler.
+rm -rf deneme //klasörü siler.
+git //git'in yardım dokümantasyonunu verir.
+git --version
+
+-------- Git Üzerinde İlgili Editörü Değiştirmek -----------
+Atom : git config --global core.editor "atom --wait"
+Visual Studio Code : git config --global core.editor "code --wait"
+Sublime Text : git config --global core.editor "'C:\Program Files\Sublime Text 3\sublime_text.exe' -w"
+
+-------- Git için Kullanıcı Adı ve Şifre -----------
+git config --global user.name "huso51" //kullanıcı adını koyduk
+git config user.name //koyduğumuz kullanıcı adı neymiş onu gördük.
+git config --global user.email abc@shootabecigostik@gmail.com
+git config user.email //koyduğumuz email'i gösterir.
+
+
+
+-------- Git init ve status ----------
+git init //bulunduğumuz klasörü bir git reposu haline getirir.
+git status //buludnuğumuz klasör bir git reposu mu, durumu nedir onun cevabını veriyor.
+touch defter.txt //dosya ekledik.
+touch ornek.py //dosya ekledik.
+git add defter.txt //eklenen dosyaları repomuza dahil ettik.
+git status //durumuna baktık.
+git add ornek.py //eklenen dosyaları repomuza dahil ettik.
+git status
+
+-------- Git log --------
+git log //atmış olduğumuz commit'lerin dökümünü / listesi verir.
+git add . //bulunduğumuz klasörün içerisinde ne kadar klasör ve dosya varsa tamamını ekler ' . ' bulunduğumuz klasörü temsil eder.
+git commit -m "first line commit" //commit'i attık mesajımızı yazdık.
+git log //atmış olduğumuz commit'lerin dökümünü / listesi verir.
+//ornek.py dosyasından 1 satır sildik
+git add . //bulunduğumuz klasörün içerisinde ne kadar klasör ve dosya varsa tamamını ekler ' . ' bulunduğumuz klasörü temsil eder.
+git commit -m "line deleted" //commit'i attık.
+
+-------- Git Branch ---------
+Master yahut Main nedir?
+Bir branch'dir. Branch Türkçe'si branş olarak okunuyor.
+Master - efendi, Main ana demek. Yani ana branş.
+Bir ağaca benzetecek olursak ağacın ana gövdesi.
+ 
+HEAD nedir?
+Git içerisinde hangi commit'de bulunduğumuzu gösterir.
+HEAD kelime manası olarak kafa demektir.
+											//HEAD burada.
+bura ali branch    ----- commit ----- commit
+                   |                      
+main -- commit ---- commit ------- commit -
+                   |                      \ --merge
+bura veli branch   ----- commit ----- commit
+
+//yeni klasör aç
+git status //duruma bak.
+git init //ilgili klasörü git reposu olarak hazırla.
+touch dosya.txt //dosya oluşturduk.
+git status //duruma baktık.
+git add dosya.txt //dosya git reposuna eklendi.
+git commit -m "first episode title write" //ilk commit'imizi attık.
+git log //attığımız commit'lere baktık.
+//dosya.txt içine birşeyler yaz.
+git status //duruma baktık.
+git add . //klasörümüzün içindekileri repoya ekledik.
+git commit -m "first lines write.!"
+
+git branch feature //feature isimli yeni bir branch / branş oluşturduk.
+git branch //branch / branş'ları listeler.
+git switch feature //feature isimli branch'e geçtik.
+touch dene.txt //dosya oluşturduk
+git add . //klasörümüzü repoya ekledik.
+git log //commit'lerimizin listesini aldık.
+git commit -m "test lines written.!"
+git swtich main //main branch'ına geçiş yaptık. Artık head main branch'ında.
+touch selam.txt > içine yaz selamlar.!
+git switch feature //feature'ye geçiş yaptık.!
+
+/---- /// ----/ ÖNEMLİ > git merge feaure // feature isimli branch ile main birleştirildi.!
+git branch arkakapak //arkakapak adı altında branch oluşturuyoruz.
+git branch //kaç tane branch olduğunu listeler.
+touch arkakapak.txt > selam selam selam.
+git add . //klasörü repoya ekledik.
+git commit -m "back page writed!" //commit'i attık.
+arkakapak.txt > ekle ekle ekle bir şeyler.
+git add . //klasörü repoya ekledik.
+git commit -m "back page writed!" //commit'i attık.
+
+----------- Fast Forward ----------
+//Yukarıda main branch'ından arkakapak isimli branch'a geçiş yaptık.
+Sonra dosyada değişiklik yaptık.
+Commit'i attık.
+Sonra dosyada değişiklik yaptık.
+Commit'i attık.
+Daha sonra switch ettik main branch'ına.
+Sonra merge yapacaz aşağıda.
+Merge yapında fast forward yapmış olduk.
+
+git merge arkakapak //birleştirdik yani fast forward yaptık.
+
+                   |--- COOMIT --- COMMIT 
+--- COMMIT --- COMMIT                    \-COMMIT //MERGE ETTİK!
+                     !Burası fast forward yaptık.
+
+
+---------- Merge Conflict -------------
+mkdir JavaKitabi
+git init
+touch ilkbolum.txt
+git add .
+git commit -m "Giriş cümlesi yazıldı."
+git branch arkakapak
+git switch arkakapak
+git add .
+git commit -m "arka kapak yazıldı"
+git switch main
+rm ilkbolum.txt
+touch bolum1.txt
+git add .
+git commit -m "ilk bolum tekrar yazıldı"
+git branch
+git merge arkakapak
+
+//burada conflict oluyor. çözmek için aşağıyı takip edin.
+git add .
+git commit -m "merge conflict çözüldü"
+git merge arkakapak
+
+git status
+clear
+
+git branch
+touch ornek.java
+
+ornek.java > String email = "email@gmail.com"
+
+git add .
+git commit -m "email eklendi"
+
+ornek.java > String email = "zimail@gmail.com"
+
+git branch feat
+git switch feat
+
+git add .
+git commit -m "email değiştirildi!"
+
+git switch main
+git status
+
+ornek.java > String email = ""
+
+git add .
+git commit -m "email silindi.!"
+
+git merge feat
+!!! --- CONLIFCT'i verdi.!
+
+ornek.java > içini sil
+
+git status 
+git add .
+git commit -m "merge conflict halledildi"
+
+
+---------- Stash ----- ÖNEMLİ --------
+Stash nedir? 
+Örnek üzerinden anlatalım.
+Main branch'ında 2 commit attık.
+sonra feat branchını açtık switch ettik 1 commit attık.
+O anda yaptığımız işi commitlemeden yani kayıt etmeden bir anda main branchına switch yapma ihtiyacı duyduk.
+Peki commit etmedeğimiz yer ne olacak?
+Yaptıklarımız ne olacak?
+Silinip gidecek mi?
+Eğer bir orada commitlemeden yaptıklarımızı zulaya alırsak kaybolmaz.
+İşte o zula stash oluyor.!
+
+git status
+git log
+git branch
+git branch ekbolum
+git switch ekbolum
+touch dosyam.txt > Ek bölüm olarak Java ile ilgiliSpring Framework koysak mı?
+git commit -m "ekstra bölüm eklendi"
+git add .
+git status 
+
+git switch main
+git switch ekbolum
+
+dosyam.txt > ekle ekle yazıları. abc abc abc
+//commitlemen main branchına geçiş yaptık.
+
+git switch main
+
+git status
+git restore dosyam.txt //en son commitine döner.
+git switch ekbolum
+git commit -m "restore edildi" //isteğe bağlı
+//o arada eskisi gitti. çünkü en son commite dönüldü
+git stash yapılan commitlenmemiş değişikliği zulalar / depoda tutar.
+dosyam.txt > değişiklik yapacaz selam selam
+git add .
+git commit -m "ornek yapıldı"
+//sakladığımız / zulaladığımız şeyi çıkartçaz.
+git stash pop //çıkarttı
+git stash list //zulanın listesini verir. tabi biz çıkarttığımz için içi boş ondan dolayı liste gelmedi.
+git stash apply stash@{0} //listeden istediğimiz elemanı indexe göre çıkarıtır.
+git stash clear //zula listesini siler atar.
+git stash //zulaya alır bir tane eleman
+git stash apply //zulada yani listede 1 eleman varsa onu çıkarır ancak aynı zamanda listede kalmaya devam eder. yani listeden silinmez!.
+
+
+---------- Geçmişe Dönme / Commitler Arası Gezinme------------
+mkdir kotlinkitabi
+cd kotlinkitabi
+git status
+git init
+touch giris.txt > içine bir şeyler yazdık.
+git add .
+git status
+git restore giris.txt
+
+git add giris.txt
+git commit -m "eklendi ne güzel"
+touch bolum1.txt > içine yazdık
+git log
+git checkout 59503e8511ae336b55ff33c3c532a72cc007e1e5 //bir geri commite gittik. hasini vererek.
+git log
+git branch
+git switch main //geri eski haline geldik
+git checkout 59503e8511ae336b55ff33c3c532a72cc007e1e5
+git branch
+
+git branch feat
+git switch feat
+git branch
+git add .
+git commit -m "giris tamamlandı!"
+
+git log
+git switch main
+git log
+
+------------ Reset ve Revert -------------
+git branch
+git log
+dosya.txt > 4. commit
+git commit -m "4. commit"
+dosya.txt > 5 commit
+git commit -m "5. commit"
+dosya.txt > 6 commit
+git commit -m "6. commit"
+
+git reset [4. commit'in id'si gelecek buraya] //4. commit'e gider. 5 ve 6 silinir. Ancak dosya.txt de yaptığımız değiliklikler silinMEZ!!!!!!
+git add .
+git commit -m "5. commit"
+git add .
+git commit -m "6. commit"
+ 
+git reset --hard [4. commit'in id'si gelecek buraya] //4. commit'e gider. 5 ve 6 silinir. Ancak dosya.txt de yaptığımız değiliklikler SİLİNİRRRRRR!!!!! geri dönüşü yok!
+git log
+
+git commit -m "5. commit yediden"
+git add .
+git commit -m "6. commit yediden"
+
+git revert [son committen bir öncekinin hash'i gelecek buraya] //ilgili hash'in commitini alır son tarafa commitler. İlgili hash ile son hash arasındakilerin değişiklikleri silinir ama log'da kalır. yani history'si silinmez. Geçmişi silinmez!
+
+---------- İki Commit Arası Farkları Bulmak Git Diff---------------
+git log
+dosya.txt > girişi bitirdik.
+git diff // yapılan değişiklik ile son commit'in farkını veriyor.
+git status
+dosya.txt > hello.
+git diff
+git diff HEAD // head o anda bulunduğumuz commit'i point eder. o anki commit ile son yaptığımız değişikliğin farkını alır.
+git diff [1. commit has'i] [2. commit hash'i]
+git branch
+git diff master feat //iki branch'in arasındaki farkı ver bana hacı cavcav. :Daha
+
+---------- rebase ÇOOK ÖNEMLİ / BAZI DEĞİŞTİRME ----------------
+Rebase'nin kullanılmaması gereken yer: daha önce projelerimizi / commitlerimizi başkalarıyla paylaşmışsak o zaman 
+rebase yapmamamız gerekir. Çünkü diğer insanların projelerini darmadağın yaparız. Soruna yol açar.
+
+				 [COMMIT]--[COMMIT]--[MERGE-COMMIT]--[COMMIT]--[MERGE-COMMIT]--[COMMIT]
+				/                    /                          /
+[COMMIT]--[COMMIT]---------------[COMMIT]-------------------[COMMIT]
+
+git switch feat
+git rebase master //feat branch'ını aşağıya dahil eder. Master branch'ına dahil eder.
+||
+||
+\/
+--------- BURASI MASTER COMMIT --------- ---------- BURASI FEAT COMMIT ----------
+[COMMIT]--[COMMIT]--[COMMIT]--[COMMIT]-- [COMMIT]--[COMMIT]--[COMMIT]--[COMMIT]--
+
+
+---------- rebase pratil -----------
+mkdir rebasetest
+git status
+git init
+touch birinci.txt
+touch ikinci.txt
+git add .
+git commit -m "main ilk commit"
+git log
+birinci.txt > içerisine birşeyler yazdık.
+git add . 
+git commit -m "master ikinci commit"
+git branch feat
+git switch feat
+git branch
+ikinci.txt > commit için birşeyle yazdık.
+git add . 
+git commit -m "feat ilk commit"
+git switch main
+birinci.txt > main'de bir commit daha.
+git add .
+git commit -m "main'de ucuncu commit"
+git switch feat
+git log
+git merge main
+git branch
+ikinci.txt > feat'in de bir ikinci commit'i olmasın mı?
+git add .
+git commit -m "feat'de ikinci commit"
+
+//işler çok karıştı ip gibi dizecez.
+git rebase master
+git log
+
+Ahada gör. ->
+
+Tren yaptık.
+--------- BURASI MASTER COMMIT --------- ---------- BURASI FEAT COMMIT ----------
+[COMMIT]--[COMMIT]--[COMMIT]--[COMMIT]-- [COMMIT]--[COMMIT]--[COMMIT]--[COMMIT]--
+
+-------------- pull request -----------------
+
+-------------- fetch pull --------- senkronize.! ----------
+git branch -r //remote yani uzak sunucudaki yani github'daki originlerin üzerindeki branchları verir.!
+git log //bir commit gerideymişiz örnek olarak öyle yani. //bunda 2 commit var. main.
+git switch feat
+git log //bunda 3 commit var. feat.
+git switch main
+git fetch origin main //uzak sunucuda yani github'da 3 feat var. Onu çekip getirdi. Biz 1 geriden takip ediyorduk.
+git log
+git status //1 tane eksik olduğunu söylüyor.
+git switch origin/main //hata veriyor. 
+git checkout origin/main //bu şekilde origin/main'e switch ettik. yain geçiş yaptık.
+git log //artık 3 commit görüyoruz. head arık uzak sunucuyu gösteriyor. 
+//git pull = fetch + merge //uzak sunucu ile aynı yapar bizim lokalimizi. aslında geriden takip ettiği için güncellemiş oldu.
+dosya.txt > değişiklik
+git add .
+git commit -m "commit abc abc"
+git pull origin main
+git status //eskiden github'dan gerideydik şu anda ise github'dan 1 commit ilerideyiz. 
+git push origin main //senkronize olduk, local'izim ve github'ımızın eşit olduğunu göreceğiz.!
+
+
+------------- Git Clone ----------------
+git clone https://github.com/huseyinaydin99/redis-terminal-commands.git //ilgili adresi indiriyor.
+git branch
+çıktı: *main
+git branch -r 
+çıktı: origin/HEAD
+çıktı: origin/main
+git remote
+çıktı: origin
+git add .
+git commit -m "selam"
+git push origin main //gönderdik aynı adrese
+//github'a readme.md dosyasını oluştur.
+git pull origin main origin //çektik getirdik readme.md'yi
+
+
+--------------- Fork ------------------
+GitHub'dan bir tane repoyu fork'la.
+git clone https://github.com/huseyinaydin99/redis-terminal-commands.git //ilgili adresi indiriyor.
+git remote //uzak adresi verir.
+touch dosya.txt | > selamun aleykün nassın hıdır?
+git add .
+git commit -m "oluşturuldu"
+git status
+git push origin main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_
